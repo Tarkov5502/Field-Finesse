@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createWorkOrder } from '../api/api';
 
-const WorkOrderForm = ({ customer }) => {
+const WorkOrderForm = ({ customer, onWorkOrderCreated }) => {
   const [workOrder, setWorkOrder] = useState({
     so_number: '',
     customer_id: customer.id,
@@ -34,28 +34,7 @@ const WorkOrderForm = ({ customer }) => {
     e.preventDefault();
     try {
       await createWorkOrder(workOrder);
-      setWorkOrder({
-        so_number: '',
-        customer_id: customer.id,
-        customer_name: customer.name,
-        customer_po: '',
-        garaganet_number: '',
-        job_name: '',
-        entered_by: '',
-        salesman_name: '',
-        door: '',
-        total_sq_ft: '',
-        hardware: '',
-        operator: '',
-        order_date: '',
-        order_type: '',
-        invoice_type: '',
-        accountable: '',
-        note: '',
-        status: 'pending',
-        followup_status: 'pending',
-        total: '',
-      });
+      onWorkOrderCreated();
     } catch (err) {
       console.error(err);
     }
