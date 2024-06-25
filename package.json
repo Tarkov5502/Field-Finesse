@@ -1,0 +1,29 @@
+{
+  "name": "field-finesse",
+  "version": "1.0.0",
+  "description": "Ticketing System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tarkov5502/Field-Finesse.git"
+},
+
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "git+https://github.com/Tarkov5502/Field-Finesse.git/issues"
+},
+
+"homepage": "https://github.com/Tarkov5502/Field-Finesse#readme",
+"dependencies": {
+  "express": "4.19.2",
+  "mysql2": "3.10.1",
+  "sequelize": "6.37.3"
+}
+
+
+}
