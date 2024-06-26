@@ -9,21 +9,17 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tarkov5502/Field-Finesse.git"
-},
-
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "git+https://github.com/Tarkov5502/Field-Finesse.git/issues"
-},
-
-"homepage": "https://github.com/Tarkov5502/Field-Finesse#readme",
-"dependencies": {
-  "express": "4.19.2",
-  "mysql2": "3.10.1",
-  "sequelize": "6.37.3"
-}
-
-
+  },
+  "homepage": "https://github.com/Tarkov5502/Field-Finesse#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mysql2": "^3.10.1",
+    "sequelize": "^6.37.3"
+  }
 }
