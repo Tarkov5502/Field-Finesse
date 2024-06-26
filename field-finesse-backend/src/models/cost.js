@@ -16,6 +16,12 @@ const Cost = sequelize.define('Cost', {
   total_cost: { type: DataTypes.FLOAT, allowNull: false },
   margin_dollar: { type: DataTypes.FLOAT, allowNull: false },
   margin_percent: { type: DataTypes.FLOAT, allowNull: false },
+}, {
+  tableName: 'costs'
 });
+
+Cost.associate = function(models) {
+  Cost.belongsTo(models.WorkOrder, { foreignKey: 'work_order_id' });
+};
 
 module.exports = Cost;

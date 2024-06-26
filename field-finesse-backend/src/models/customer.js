@@ -11,6 +11,12 @@ const Customer = sequelize.define('Customer', {
   phone_number: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, allowNull: false },
   lot_number: { type: DataTypes.STRING, allowNull: false },
+}, {
+  tableName: 'customers'
 });
+
+Customer.associate = function(models) {
+  Customer.hasMany(models.WorkOrder, { foreignKey: 'customer_id' });
+};
 
 module.exports = Customer;

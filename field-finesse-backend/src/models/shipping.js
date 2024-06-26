@@ -9,6 +9,12 @@ const Shipping = sequelize.define('Shipping', {
   bo: { type: DataTypes.STRING, allowNull: false },
   distance_miles: { type: DataTypes.FLOAT, allowNull: false },
   time_minutes: { type: DataTypes.FLOAT, allowNull: false },
+}, {
+  tableName: 'shippings'
 });
+
+Shipping.associate = function(models) {
+  Shipping.belongsTo(models.WorkOrder, { foreignKey: 'work_order_id' });
+};
 
 module.exports = Shipping;

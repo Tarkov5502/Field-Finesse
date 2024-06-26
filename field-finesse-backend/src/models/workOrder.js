@@ -4,7 +4,7 @@ const sequelize = require('../config/database');
 const WorkOrder = sequelize.define('WorkOrder', {
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   so_number: { type: DataTypes.STRING, allowNull: false },
-  customer_id: { type: DataTypes.INTEGER, allowNull: false },
+  customer_id: { type: DataTypes.INTEGER, allowNull: true },
   customer_name: { type: DataTypes.STRING, allowNull: false },
   customer_po: { type: DataTypes.STRING, allowNull: false },
   garaganet_number: { type: DataTypes.STRING, allowNull: false },
@@ -23,6 +23,8 @@ const WorkOrder = sequelize.define('WorkOrder', {
   status: { type: DataTypes.STRING, allowNull: false },
   followup_status: { type: DataTypes.STRING, allowNull: false },
   total: { type: DataTypes.FLOAT, allowNull: false },
+}, {
+  tableName: 'work_orders'
 });
 
 WorkOrder.associate = function(models) {

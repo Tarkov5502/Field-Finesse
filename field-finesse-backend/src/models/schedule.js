@@ -19,6 +19,12 @@ const Schedule = sequelize.define('Schedule', {
   dimensions: { type: DataTypes.STRING, allowNull: false },
   windows: { type: DataTypes.STRING, allowNull: false },
   windows_description: { type: DataTypes.TEXT, allowNull: false },
+}, {
+  tableName: 'schedules'
 });
+
+Schedule.associate = function(models) {
+  Schedule.belongsTo(models.WorkOrder, { foreignKey: 'work_order_id' });
+};
 
 module.exports = Schedule;
