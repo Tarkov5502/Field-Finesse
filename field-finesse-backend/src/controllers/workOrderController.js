@@ -15,12 +15,12 @@ exports.createWorkOrder = async (req, res) => {
     const { description, status, schedule, shipping, cost } = req.body;
     await connection.beginTransaction();
 
-    const [workOrderResult] = await connection.query('INSERT INTO work_orders (description, status) VALUES (?, ?)', [description, status]);
+    const [workOrderResult] = await connection.query('INSERT INTO test_work_orders (description, status) VALUES (?, ?)', [description, status]);
     const workOrderId = workOrderResult.insertId;
 
-    await connection.query('INSERT INTO schedule (work_order_id, start_date, end_date) VALUES (?, ?, ?)', [workOrderId, schedule.start_date, schedule.end_date]);
-    await connection.query('INSERT INTO shipping (work_order_id, address, city) VALUES (?, ?, ?)', [workOrderId, shipping.address, shipping.city]);
-    await connection.query('INSERT INTO cost (work_order_id, amount, currency) VALUES (?, ?, ?)', [workOrderId, cost.amount, cost.currency]);
+    await connection.query('INSERT INTO test_schedules (work_order_id, start_date, end_date) VALUES (?, ?, ?)', [workOrderId, schedule.start_date, schedule.end_date]);
+    await connection.query('INSERT INTO test_shippings (work_order_id, address, city) VALUES (?, ?, ?)', [workOrderId, shipping.address, shipping.city]);
+    await connection.query('INSERT INTO test_costs (work_order_id, amount, currency) VALUES (?, ?, ?)', [workOrderId, cost.amount, cost.currency]);
 
     await connection.commit();
     res.status(201).json({ workOrderId, description, status, schedule, shipping, cost });
@@ -36,7 +36,7 @@ exports.createWorkOrder = async (req, res) => {
 exports.getWorkOrders = async (req, res) => {
   try {
     const filters = req.query;
-    let query = 'SELECT * FROM work_orders WHERE 1=1';
+    let query = 'SELECT * FROM test_work_orders WHERE 1=1';
     const queryParams = [];
 
     Object.keys(filters).forEach(key => {
@@ -55,7 +55,7 @@ exports.getWorkOrders = async (req, res) => {
 exports.getWorkOrderById = async (req, res) => {
   try {
     const { id } = req.params;
-    const [workOrders] = await pool.query('SELECT * FROM work_orders WHERE id = ?', [id]);
+    const [workOrders] = await pool.query('SELECT * FROM test_work_orders WHERE id = ?', [id]);
     if (workOrders.length === 0) {
       return res.status(404).json({ error: 'Work order not found' });
     }
@@ -73,14 +73,14 @@ exports.updateWorkOrder = async (req, res) => {
     const { description, status, schedule, shipping, cost } = req.body;
     await connection.beginTransaction();
 
-    const [workOrderResult] = await connection.query('UPDATE work_orders SET description = ?, status = ? WHERE id = ?', [description, status, id]);
+    const [workOrderResult] = await connection.query('UPDATE test_work_orders SET description = ?, status = ? WHERE id = ?', [description, status, id]);
     if (workOrderResult.affectedRows === 0) {
       return res.status(404).json({ error: 'Work order not found' });
     }
 
-    await connection.query('UPDATE schedule SET start_date = ?, end_date = ? WHERE work_order_id = ?', [schedule.start_date, schedule.end_date, id]);
-    await connection.query('UPDATE shipping SET address = ?, city = ? WHERE work_order_id = ?', [shipping.address, shipping.city, id]);
-    await connection.query('UPDATE cost SET amount = ?, currency = ? WHERE work_order_id = ?', [cost.amount, cost.currency, id]);
+    await connection.query('UPDATE test_schedules SET start_date = ?, end_date = ? WHERE work_order_id = ?', [schedule.start_date, schedule.end_date, id]);
+    await connection.query('UPDATE test_shippings SET address = ?, city = ? WHERE work_order_id = ?', [shipping.address, shipping.city, id]);
+    await connection.query('UPDATE test_costs SET amount = ?, currency = ? WHERE work_order_id = ?', [cost.amount, cost.currency, id]);
 
     await connection.commit();
     res.status(200).json({ id, description, status, schedule, shipping, cost });
@@ -99,10 +99,10 @@ exports.deleteWorkOrder = async (req, res) => {
     const { id } = req.params;
     await connection.beginTransaction();
 
-    await connection.query('DELETE FROM schedule WHERE work_order_id = ?', [id]);
-    await connection.query('DELETE FROM shipping WHERE work_order_id = ?', [id]);
-    await connection.query('DELETE FROM cost WHERE work_order_id = ?', [id]);
-    const [result] = await connection.query('DELETE FROM work_orders WHERE id = ?', [id]);
+    await connection.query('DELETE FROM test_schedules WHERE work_order_id = ?', [id]);
+    await connection.query('DELETE FROM test_shippings WHERE work_order_id = ?', [id]);
+    await connection.query('DELETE FROM test_costs WHERE work_order_id = ?', [id]);
+    const [result] = await connection.query('DELETE FROM test_work_orders WHERE id = ?', [id]);
     
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Work order not found' });
