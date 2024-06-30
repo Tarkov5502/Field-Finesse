@@ -1,6 +1,6 @@
 const sequelize = require('../config/database');
 const Customer = require('./customer');
-const WorkOrder = require('./workOrder');
+const WorkOrder = require('./workOrder');  // Ensure WorkOrder is correctly defined
 const Schedule = require('./schedule');
 const Shipping = require('./shipping');
 const Cost = require('./cost');

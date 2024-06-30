@@ -3,7 +3,6 @@ const { sequelize, models } = require('./src/models/index');
 
 const customerRoutes = require('./src/routes/customerRoutes');
 const workOrderRoutes = require('./src/routes/workOrderRoutes');
-// Import other routes here...
 
 const app = express();
 
@@ -11,13 +10,11 @@ app.use(express.json());
 
 app.use('/customers', customerRoutes);
 app.use('/work-orders', workOrderRoutes);
-// Use other routes here...
 
-// Sync database and start the server
-sequelize.sync({ force: true })
+sequelize.sync({ alter: true })  // Changed from force: true to alter: true to avoid data loss
   .then(() => {
     console.log('Database & tables created!');
-    app.listen(3000, () => {
+    app.listen(3000, '192.168.1.163', () => {
       console.log('Server is running on port 3000');
     });
   })
@@ -26,4 +23,3 @@ sequelize.sync({ force: true })
   });
 
 module.exports = app;
-
