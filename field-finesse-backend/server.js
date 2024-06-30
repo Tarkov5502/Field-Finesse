@@ -8,8 +8,8 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/customers', customerRoutes);
-app.use('/work-orders', workOrderRoutes);
+app.use('/api/customers', customerRoutes);
+app.use('/api/workorders', workOrderRoutes);
 
 sequelize.sync({ alter: true })  // Changed from force: true to alter: true to avoid data loss
   .then(() => {
