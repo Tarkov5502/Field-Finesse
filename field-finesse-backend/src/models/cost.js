@@ -17,7 +17,7 @@ const Cost = sequelize.define('Cost', {
   margin_dollar: { type: DataTypes.FLOAT, allowNull: false },
   margin_percent: { type: DataTypes.FLOAT, allowNull: false },
 }, {
-  tableName: 'costs'
+  tableName: 'test_costs'
 });
 
 Cost.associate = function(models) {

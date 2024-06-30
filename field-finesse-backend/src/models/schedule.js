@@ -20,7 +20,7 @@ const Schedule = sequelize.define('Schedule', {
   windows: { type: DataTypes.STRING, allowNull: false },
   windows_description: { type: DataTypes.TEXT, allowNull: false },
 }, {
-  tableName: 'schedules'
+  tableName: 'test_schedules'
 });
 
 Schedule.associate = function(models) {

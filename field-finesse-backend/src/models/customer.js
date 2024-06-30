@@ -12,7 +12,7 @@ const Customer = sequelize.define('Customer', {
   email: { type: DataTypes.STRING, allowNull: false },
   lot_number: { type: DataTypes.STRING, allowNull: false },
 }, {
-  tableName: 'customers'
+  tableName: 'test_customers'
 });
 
 Customer.associate = function(models) {

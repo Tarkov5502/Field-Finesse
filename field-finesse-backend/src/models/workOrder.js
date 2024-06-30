@@ -24,7 +24,7 @@ const WorkOrder = sequelize.define('WorkOrder', {
   followup_status: { type: DataTypes.STRING, allowNull: false },
   total: { type: DataTypes.FLOAT, allowNull: false },
 }, {
-  tableName: 'work_orders'
+  tableName: 'test_work_orders'
 });
 
 WorkOrder.associate = function(models) {

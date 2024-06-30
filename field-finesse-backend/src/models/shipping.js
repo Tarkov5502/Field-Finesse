@@ -10,7 +10,7 @@ const Shipping = sequelize.define('Shipping', {
   distance_miles: { type: DataTypes.FLOAT, allowNull: false },
   time_minutes: { type: DataTypes.FLOAT, allowNull: false },
 }, {
-  tableName: 'shippings'
+  tableName: 'test_shippings'
 });
 
 Shipping.associate = function(models) {
