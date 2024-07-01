@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../server'); // Adjust the path if your Express app is located elsewhere
+const app = require('./field-finesse-backend/server'); // Adjust the path if your Express app is located elsewhere
 
 describe('Customer API', () => {
 
