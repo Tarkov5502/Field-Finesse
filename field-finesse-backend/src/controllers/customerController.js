@@ -56,20 +56,16 @@ exports.getCustomerById = async (req, res) => {
 exports.updateCustomer = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, client_type, subtype, ship_to, ship_to_address, phone_number, email, lot_number, createdAt, updatedAt } = req.body;
-    const [result] = await pool.query(
-      'UPDATE test_customers SET name = ?, client_type = ?, subtype = ?, ship_to = ?, ship_to_address = ?, phone_number = ?, email = ?, lot_number = ?, createdAt = ?, updatedAt = ? WHERE id = ?',
-      [name, client_type, subtype, ship_to, ship_to_address, phone_number, email, lot_number, createdAt, updatedAt, id]
-    );
+    const { name, email } = req.body;
+    const [result] = await pool.query('UPDATE test_customers SET name = ?, email = ? WHERE id = ?', [name, email, id]);
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Customer not found' });
     }
-    res.status(200).json({ id, name, client_type, subtype, ship_to, ship_to_address, phone_number, email, lot_number, createdAt, updatedAt });
+    res.status(200).json({ id, name, email });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
-
 
 // Delete a customer
 exports.deleteCustomer = async (req, res) => {
